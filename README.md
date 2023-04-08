@@ -1,10 +1,12 @@
 # Pygame-tool
 ## Brief Introduction
 A tool to help programmers to create a UI with Pygame easier and faster.
-## Quick Start
-### Definitions
-##### Sprite
-In Pygame Tool, each widget has its own "space", which is a Rect used to format the widget, and the widget together with its "space" is called a "sprite".
+## Definitions
+### Widget
+A widget in Pygame Tool means an instance of a class that defines a combination of elements in pygame used to show information or a interactive part.
+### Sprite
+In Pygame Tool, each widget has its own "space", which is a Rect used to format the widget, and the widget together with its "space" is called a "sprite". Most of the time, a "sprite" stands for its widget.
+
 ## Sprite
 In the simpliest way, You can just follow the instruction of each widget and create instances of them.
 
@@ -33,16 +35,17 @@ while True:
 In the same way, you can create all kinds of widgets in pygame-tool.
 
 ### Positions
-In this case, if you want to move a sprite, you can do it like this (only works here, don't do the same thing on a sprite contained by a stage!):
+In this case, if you want to set the position of a sprite, you can simply do it like this (only works well here):
 ```
 [target].sprite.rect.topleft = tuple[int, int]
 ```
+By the way, Sprite.sprite.rect is a pygame.Rect instance, so you can just move it as a normal rect.
 ### Let Widgets Handle Events
-Widgets such as Button is expected to be able to handle click event. As a result, all widgets that can be triggered have a function ".update()".
+Widgets such as Button is expected to be able to handle click event. As a result, all widgets that can be triggered have methods called ```.update()```.
 
-Function ".update()" takes an event and check it. If the event needs handling, the function will use the event as well as the current position of your mouse to handle the specific event.
+Method ```.update()``` takes an event and check it. If the event needs handling, the function will use the event as well as the current position of your mouse to handle the specific event.
 
-This function should be used like this:
+An example of using ```.update()``` on a triggerable sprite:
 ```
 import sys
 import pygame
@@ -63,7 +66,7 @@ while True:
   pygame.display.update()
 ```
 ## Stages
-In order to manage the sprites, we can create a Stage instance. Usually, you only need to create a Stage, append the sprite, and use ".show(screen)" in the mainloop.
+In order to manage the sprites, we can create a Stage instance. Usually, you only need to create a Stage, append the sprite, and use ```.show(screen)``` in the mainloop.
 It's worth mentioning that the stage won't update the sprites, so you have to update them respectively. The method was introduced above.
 
 Here's an example for how to use a stage to operate a group of sprites:
@@ -113,9 +116,9 @@ while True:
 ### Positions
 Positions of sprites on stages are more complicated. There are two types: Absolute Position and Relative Position
 #### Absolute Position
-This one is quite easy and useless. If you want to use absolute positions, you could just not use stages.
+This one is quite useless. If you want to use absolute positions, you could just not use stages.
 
-The code of moving the sprites is the same as that in Sprite-Positions. It's worth mentioning that you should always compose the sprites seperately and use ```Stage.blit()``` instead of using ```Stage.show()```
+However, if you need a stage for some other purpose, you can use the code to change a sprite's position shown in Sprite-Positions. It's worth mentioning that you should always compose the sprites seperately and use ```Stage.blit()``` instead of using ```Stage.show()```
 
 #### Relative Position
 This is why stages are created. Sometimes you'll find that you need to move a group of sprites. At this time, you could put them in one stage and move the whole stage. Just do like this:
@@ -127,7 +130,7 @@ And you'll find that you sometimes need to place the sprites on different points
 ```
 Widget.sprite.rel_pos.topleft = tuple[int, int]
 ```
-By the way, ```Widget.sprite.rel_pos``` is a pygame.Rect instance. Therefore, you can simply move it as a normal rect.
+By the way, ```Widget.sprite.rel_pos``` is a ```pygame.Rect``` instance. Therefore, you can simply move it as a normal rect.
 
-At last, don't forget that if you have changed the position (no matter which position, the stage's one or the sprites' ones) when the mainloop is running, you should set "Stage.need_composing" to True.
+At last, don't forget that ```Stage.need_composing``` should be set to True if you change the position (no matter which position, the stage's one or the sprites' ones) when the mainloop is running.
 
