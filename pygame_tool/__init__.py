@@ -5,14 +5,13 @@ import os
 
 
 # Init variables
-version = 'Beta 0.3'
+version = '1.0.0'
 desc = '''
-已重构，正在撰写中文注释
-注释撰写进度：已完成全部的注释，大部分注释未撰写中文版，等待撰写。
+注释写完成，正式版已发布
 '''
 """
 Attention: all the positions and sizes given should be formatted like this: (x, y) or (width, height)
-注意：所有传入的坐标和size参数都应为(x, y) 或 (宽度, 高度) 形式
+注意：所有传入的坐标和size参数都应为(x, y) 或 (宽度, 高度) 格式
 """
 base_dir = tool_base_dir = os.path.dirname(os.path.abspath(__file__))
 pygame.font.init()
@@ -131,7 +130,7 @@ class List:
         """
         Blit the list on the screen. 将本列表显示在屏幕上
         :param screen: The screen to display the list on. 显示列表的屏幕
-        :param with_compose: If the list will be formatted before being displayed. 是否在显示列表前将期组合好
+        :param with_compose: If the list will be formatted before being displayed. 是否在显示列表前将其组合好
         :return: None
         """
         for i, text, rect in self.displayed:
