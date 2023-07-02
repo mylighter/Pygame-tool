@@ -137,7 +137,6 @@ class Switch:
         self.switch.compose()
         self.text.space.rect.right = self.background.left - 8
         self.text.space.rect.centery = self.background.centery
-        self.text.space.settle()
 
     def blit(self, screen):
         """
